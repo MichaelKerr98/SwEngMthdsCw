@@ -34,3 +34,5 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 .idea/
+# Default ignored files
+/.idea/workspace.xml
