@@ -18,6 +18,8 @@
                 <version>3.1.0</version>
                 <configuration>
                     <archive>
+                        <source>1.7</source>
+                        <target>1.7</target>
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
