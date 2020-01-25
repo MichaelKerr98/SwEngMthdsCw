@@ -7,16 +7,15 @@
     <groupId>groupId</groupId>
     <artifactId>SwEngMthdsCw</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-
     <build>
         <plugins>
             <plugin>
                 <!-- Build an executable JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.8.0</version>
                 <configuration>
+                    <release>7</release>
                     <archive>
                         <source>1.8</source>
                         <target>1.8</target>
