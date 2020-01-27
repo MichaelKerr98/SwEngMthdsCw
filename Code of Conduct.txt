@@ -1,0 +1,15 @@
+•    Always communicate. Always check on Discord at least once a day.
+•    Attend meetings and adhere to deadlines. If you have a valid reason not to attend please let the team know in advance.
+
+•    Follow the git flow principles.
+•    Don't hesitate to review other people's work. Always welcome criticism.
+•    Be consistent with other people's way of doing things but feel free to discuss improvements.
+
+•    Always test.
+•    When in doubt, ask on Discord.
+•    Prevent being a blocker to your teammates.
+•    Create software for users, not for managers.
+•    Embrace that we are stronger as a team, working towards a shared goal.
+•    Share knowledge and expertise with others and help them grow.
+•    Treat the people in the team as you would like to be treated by them.
+•    Guide others to embrace and adhere to these principles.
