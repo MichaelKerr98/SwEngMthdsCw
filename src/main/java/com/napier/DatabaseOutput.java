@@ -1,6 +1,8 @@
 package com.napier;
 
-public class MainClass {
+/** commentcommentcomment **/
+
+public class DatabaseOutput {
     public static void main(String[] args){
         System.out.println("Test");
     }
