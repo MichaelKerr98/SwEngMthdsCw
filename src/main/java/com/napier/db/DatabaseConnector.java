@@ -25,7 +25,7 @@ public class DatabaseConnector implements DataLayer {
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
             try {
-                Thread.sleep(10_000);
+                Thread.sleep(30_000);
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "supersecurepw");
                 System.out.println("Successfully connected..");
                 Thread.sleep(5_000);
