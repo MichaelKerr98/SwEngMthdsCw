@@ -57,28 +57,32 @@ public class DatabaseConnector implements DataLayer {
      * Method which gets a SQL-Statement as a parameter and returns a Set of Results of that statement.
      *
      * @param sql The SQL Statement.
-     * @return returns a Set of Results.
-     * @throws SQLException when the SQL Statements is invalid.
+     * @return The Set of Results.
+     * @throws SQLException Thrown when the SQL Statements is invalid.
      */
     @Override
-    public ResultSet executeSQLStatement(String sql) throws SQLException {
-        return executeSQLStatement(sql, -1);
+    public ResultSet executeQuery(String sql) throws SQLException {
+        return executeQuery(sql, -1);
     }
 
     /**
-     * Method which gets a SQL-Statement as a parameter and returns a Set of N Results of that statement.
+     * Method which gets a SQL-Statement as a parameter and returns a Set of [N] Results of that statement.
      *
      * @param sql The SQL Statement.
-     * @param maxRows Sets the limit for the maximum number of rows.
-     * @return returns a Set of Results.
-     * @throws SQLException when the SQL Statements is invalid.
+     * @param maxRows The limit for the maximum number of Results.
+     * @return The Set of Results.
+     * @throws SQLException Thrown when the SQL Statements is invalid.
      */
     @Override
-    public ResultSet executeSQLStatement(String sql, int maxRows) throws SQLException {
-        Statement statement = con.createStatement();
-        if(maxRows>=0){
-            statement.setMaxRows(maxRows);
-        }
+    public ResultSet executeQuery(String sql, int maxRows) throws SQLException {
+        Statement statement = buildStatement(maxRows);
         return statement.executeQuery(sql);
+    }
+
+    private Statement buildStatement(int maxRows) throws SQLException {
+        Statement statement = con.createStatement();
+        if(maxRows>=0)
+            statement.setMaxRows(maxRows);
+        return statement;
     }
 }

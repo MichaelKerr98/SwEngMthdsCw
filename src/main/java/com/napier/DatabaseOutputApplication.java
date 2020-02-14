@@ -19,7 +19,7 @@ public class DatabaseOutputApplication {
         DataLayer connector = new DatabaseConnector();
         connector.connect();
 
-        ResultSet resultSet = connector.executeSQLStatement(
+        ResultSet resultSet = connector.executeQuery(
                 "SELECT country.name, country.population "
                         + "FROM country "
                         + "ORDER BY country.population DESC",
