@@ -1,4 +1,4 @@
-# USE CASE: 3 Produce a report that shows the number of people, people living in cities and not living in cities.
+# USE CASE: 4 Produce a report that shows the number of people, people living in cities and not living in cities.
 
 ## CHARACTERISTIC INFORMATION
 
