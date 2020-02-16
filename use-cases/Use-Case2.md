@@ -1,4 +1,4 @@
-# USE CASE: 1 Produce a report that shows the either the population of a city, district, country, region, continent or world
+# USE CASE: 2 Produce a report that shows either the population of a city, district, country, region, continent or world
 
 ## CHARACTERISTIC INFORMATION
 
