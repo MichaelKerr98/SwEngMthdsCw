@@ -14,12 +14,19 @@ rectangle "DatabaseOutput" {
     usecase UC3 as "Create report for population of capital cities"
     usecase UC4 as "Create report for population of cities and non citites"
     usecase UC5 as "Create report for spoken languages"
+    usecase PRINT as "Print report"
 
     U -- UC1
     U -- UC2
     U -- UC3
     U -- UC4
     U -- UC5
+
+    UC1 ..> PRINT : extend
+    UC2 ..> PRINT : extend
+    UC3 ..> PRINT : extend
+    UC4 ..> PRINT : extend
+    UC5 ..> PRINT : extend
 
     UC1 -- DB
     UC2 -- DB
