@@ -1,0 +1,13 @@
+All the countries in the ..... organised by largest population to smallest.
+
+The top N populated countries in the ..... where N is provided by the user.
+
+All the cities in the ..... organised by largest population to smallest.
+
+The top N populated cities in the ..... where N is provided by the user.
+
+All the capital cities in the ..... organised by largest population to smallest.
+
+The top N populated capital cities in the ..... where N is provided by the user.
+
+The population of people, people living in cities, and people not living in cities in each .....
