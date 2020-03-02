@@ -1,7 +1,8 @@
 package com.napier.reports;
 
 /**
- *
+ * The CityReport. Contains city-information such as
+ * the city name, the cities country, the cities destrict and the cities population.
  */
 public class CityReport {
 
@@ -11,11 +12,12 @@ public class CityReport {
     private final Integer population;
 
     /**
+     * The Constructor of the CityReport.
      *
-     * @param name
-     * @param country
-     * @param district
-     * @param population
+     * @param name The name of the city.
+     * @param country The country of the city.
+     * @param district The district of the city.
+     * @param population The population of the city.
      */
     public CityReport(String name, String country, String district, Integer population) {
         this.name = name;
@@ -25,32 +27,36 @@ public class CityReport {
     }
 
     /**
+     * Getter of the cities name.
      *
-     * @return
+     * @return The cities name.
      */
     public String getName() {
         return name;
     }
 
     /**
+     * Getter of the cities country.
      *
-     * @return
+     * @return The countries name.
      */
     public String getCountry() {
         return country;
     }
 
     /**
+     * Getter of the cities district.
      *
-     * @return
+     * @return The cities district.
      */
     public String getDistrict() {
         return district;
     }
 
     /**
+     * Getter of the cities population.
      *
-     * @return
+     * @return The cities population.
      */
     public Integer getPopulation() {
         return population;
