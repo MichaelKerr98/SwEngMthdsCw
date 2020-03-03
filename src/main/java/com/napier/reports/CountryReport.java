@@ -85,4 +85,21 @@ public class CountryReport {
     public Integer getCapital() {
         return capital;
     }
+
+    /**
+     * Outputs all the fields of this object.
+     *
+     * @return String with all fields.
+     */
+    @Override
+    public String toString() {
+        return "CountryReport{" +
+                "countryCode='" + countryCode + '\'' +
+                ", countryName='" + countryName + '\'' +
+                ", continent='" + continent + '\'' +
+                ", region='" + region + '\'' +
+                ", population=" + population +
+                ", capital=" + capital +
+                '}';
+    }
 }

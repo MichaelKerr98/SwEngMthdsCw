@@ -49,4 +49,18 @@ public class LanguageReport {
     public double getPercentage() {
         return percentage;
     }
+
+    /**
+     * Outputs all the fields of this object.
+     *
+     * @return String with all fields.
+     */
+    @Override
+    public String toString() {
+        return "LanguageReport{" +
+                "language='" + language + '\'' +
+                ", speakers=" + speakers +
+                ", percentage=" + percentage +
+                '}';
+    }
 }

@@ -61,4 +61,19 @@ public class CityReport {
     public Integer getPopulation() {
         return population;
     }
+
+    /**
+     * Outputs all the fields of this object.
+     *
+     * @return String with all fields.
+     */
+    @Override
+    public String toString() {
+        return "CityReport{" +
+                "name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", district='" + district + '\'' +
+                ", population=" + population +
+                '}';
+    }
 }
