@@ -64,10 +64,33 @@ public class DatabaseConnector implements DataLayer {
         }
     }
 
+    /**
+     * Method that returns a ordered List of CityReports of a specific district.
+     *
+     * @param district The name of the district.
+     * @param limit    The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of CityReports of a specific district.
+     * @throws SQLException Thrown when there is an database access error.
+     */
     @Override
     public List<CityReport> getCitiesInADistrictOrganizedByLargestToSmallestPopulation(String district, int limit) throws SQLException {
         return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
                 "AND c.district = '"+ district+"'\n" +
+                DESC_ORDER,limit);
+    }
+
+    /**
+     * Method that returns a ordered List of CityReports of a specific continent.
+     *
+     * @param continent The name of the continent.
+     * @param limit    The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of CityReports of a specific continent.
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    @Override
+    public List<CityReport> getCitiesInAContinentOrganizedByLargestToSmallestPopulation(String continent, int limit) throws SQLException {
+        return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
+                "AND cn.continent = '"+ continent+"'\n" +
                 DESC_ORDER,limit);
     }
 
@@ -83,10 +106,6 @@ public class DatabaseConnector implements DataLayer {
                     resultSet.getInt("Population")));
         }
         return reports;
-    }
-
-    private ResultSet executeQuery(String sql) throws SQLException {
-        return executeQuery(sql, -1);
     }
 
     private ResultSet executeQuery(String sql, int maxRows) throws SQLException {

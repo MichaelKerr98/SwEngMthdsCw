@@ -31,4 +31,14 @@ public interface DataLayer {
      */
     List<CityReport> getCitiesInADistrictOrganizedByLargestToSmallestPopulation(String district, int limit) throws SQLException;
 
+    /**
+     * Method that returns a ordered List of CityReports of a specific continent.
+     *
+     * @param continent The name of the continent.
+     * @param limit    The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of CityReports of a specific continent.
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    List<CityReport> getCitiesInAContinentOrganizedByLargestToSmallestPopulation(String continent, int limit) throws SQLException;
+
 }
