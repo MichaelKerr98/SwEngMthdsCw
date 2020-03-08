@@ -2,7 +2,6 @@ package com.napier.db;
 
 import com.napier.reports.CityReport;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -40,5 +39,15 @@ public interface DataLayer {
      * @throws SQLException Thrown when there is an database access error.
      */
     List<CityReport> getCitiesInAContinentOrganizedByLargestToSmallestPopulation(String continent, int limit) throws SQLException;
+
+    /**
+     * Method that returns a ordered List of CityReports of a specific region.
+     *
+     * @param region The name of the region.
+     * @param limit    The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of CityReports of a specific region.
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    List<CityReport> getCitiesInARegionOrganisedByLargestToSmallestPopulation(String region, int limit) throws SQLException;
 
 }

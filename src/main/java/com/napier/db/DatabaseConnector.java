@@ -94,6 +94,19 @@ public class DatabaseConnector implements DataLayer {
                 DESC_ORDER,limit);
     }
 
+    /**
+     * Method that returns a ordered List of CityReports of a specific region.
+     *
+     * @param region The name of the region.
+     * @param limit    The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of CityReports of a specific region.
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    public List<CityReport> getCitiesInARegionOrganisedByLargestToSmallestPopulation(String region, int limit) throws SQLException {
+        return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
+                "AND cn.region = '"+ region+"'\n" +
+                DESC_ORDER,limit);
+    }
 
     private List<CityReport> createCityReport(String sql, int limit) throws SQLException {
         ResultSet resultSet = executeQuery(sql, limit);
