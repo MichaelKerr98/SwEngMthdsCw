@@ -1,7 +1,10 @@
 package com.napier.db;
 
+import com.napier.reports.CityReport;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * The DataLayer-Interface.
@@ -19,21 +22,13 @@ public interface DataLayer {
     void disconnect();
 
     /**
-     * Method which gets a SQL-Statement as a parameter and returns a Set of Results of that statement.
+     * Method that returns a ordered List of CityReports of a specific district.
      *
-     * @param sql The SQL Statement.
-     * @return The Set of Results.
-     * @throws SQLException Thrown when the SQL Statements is invalid.
+     * @param district The name of the district.
+     * @param limit    The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of CityReports of a specific district.
+     * @throws SQLException Thrown when there is an database access error.
      */
-    ResultSet executeQuery(String sql) throws SQLException;
+    List<CityReport> getCitiesInADistrictOrganizedByLargestToSmallestPopulation(String district, int limit) throws SQLException;
 
-    /**
-     * Method which gets a SQL-Statement as a parameter and returns a Set of [N] Results of that statement.
-     *
-     * @param sql The SQL Statement.
-     * @param maxRows The limit for the maximum number of Results.
-     * @return The Set of Results.
-     * @throws SQLException Thrown when the SQL Statements is invalid.
-     */
-    ResultSet executeQuery(String sql, int maxRows) throws SQLException;
 }

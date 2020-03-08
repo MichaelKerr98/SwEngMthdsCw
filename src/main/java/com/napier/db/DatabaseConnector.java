@@ -13,6 +13,13 @@ public class DatabaseConnector implements DataLayer {
 
     private Connection con = null;
 
+    private static String SELECT_CITY = "SELECT c.name, c.population, c.district, cn.name as country\n";
+    private static String FROM_CITY_C_AND_COUNTRY_CN_TABLE = "FROM city c, country cn\n";
+    private static String WHERE_CN_CC_EQUALS_C_CC = "WHERE cn.code = c.countrycode\n";
+    public static String DESC_ORDER = "ORDER BY c.population DESC;\n";
+    public static String SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE = SELECT_CITY + FROM_CITY_C_AND_COUNTRY_CN_TABLE + WHERE_CN_CC_EQUALS_C_CC;
+
+
     /**
      * Method to connect to the MySQL Database.
      */
@@ -57,31 +64,13 @@ public class DatabaseConnector implements DataLayer {
         }
     }
 
-    /**
-     * Method which gets a SQL-Statement as a parameter and returns a Set of Results of that statement.
-     *
-     * @param sql The SQL Statement.
-     * @return The Set of Results.
-     * @throws SQLException Thrown when the SQL Statements is invalid.
-     */
     @Override
-    public ResultSet executeQuery(String sql) throws SQLException {
-        return executeQuery(sql, -1);
+    public List<CityReport> getCitiesInADistrictOrganizedByLargestToSmallestPopulation(String district, int limit) throws SQLException {
+        return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
+                "AND c.district = '"+ district+"'\n" +
+                DESC_ORDER,limit);
     }
 
-    /**
-     * Method which gets a SQL-Statement as a parameter and returns a Set of [N] Results of that statement.
-     *
-     * @param sql The SQL Statement.
-     * @param maxRows The limit for the maximum number of Results.
-     * @return The Set of Results.
-     * @throws SQLException Thrown when the SQL Statements is invalid.
-     */
-    @Override
-    public ResultSet executeQuery(String sql, int maxRows) throws SQLException {
-        Statement statement = buildStatement(maxRows);
-        return statement.executeQuery(sql);
-    }
 
     private List<CityReport> createCityReport(String sql, int limit) throws SQLException {
         ResultSet resultSet = executeQuery(sql, limit);
@@ -94,6 +83,15 @@ public class DatabaseConnector implements DataLayer {
                     resultSet.getInt("Population")));
         }
         return reports;
+    }
+
+    private ResultSet executeQuery(String sql) throws SQLException {
+        return executeQuery(sql, -1);
+    }
+
+    private ResultSet executeQuery(String sql, int maxRows) throws SQLException {
+        Statement statement = buildStatement(maxRows);
+        return statement.executeQuery(sql);
     }
 
     private Statement buildStatement(int maxRows) throws SQLException {
