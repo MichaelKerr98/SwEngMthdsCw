@@ -122,6 +122,19 @@ public class DatabaseConnector implements DataLayer {
                 DESC_ORDER, limit);
     }
 
+    /**
+     * Method that returns a ordered List of CityReports of the world.
+     *
+     * @param limit The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of CityReports of the world.
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    @Override
+    public List<CityReport> getCitiesInTheWorldOrganizedByLargestToSmallestPopulation(int limit) throws SQLException {
+        return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
+                DESC_ORDER,limit);
+    }
+
 
     private List<CityReport> createCityReport(String sql, int limit) throws SQLException {
         ResultSet resultSet = executeQuery(sql, limit);
