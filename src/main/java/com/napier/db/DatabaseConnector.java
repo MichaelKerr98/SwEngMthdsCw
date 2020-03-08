@@ -1,6 +1,10 @@
 package com.napier.db;
 
+import com.napier.reports.CityReport;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Initializes the connection and disconnection from the application and database.
@@ -77,6 +81,19 @@ public class DatabaseConnector implements DataLayer {
     public ResultSet executeQuery(String sql, int maxRows) throws SQLException {
         Statement statement = buildStatement(maxRows);
         return statement.executeQuery(sql);
+    }
+
+    private List<CityReport> createCityReport(String sql, int limit) throws SQLException {
+        ResultSet resultSet = executeQuery(sql, limit);
+        ArrayList<CityReport> reports = new ArrayList<>();
+        while (resultSet.next()){
+            reports.add(new CityReport(
+                    resultSet.getString("Name"),
+                    resultSet.getString("Country"),
+                    resultSet.getString("District"),
+                    resultSet.getInt("Population")));
+        }
+        return reports;
     }
 
     private Statement buildStatement(int maxRows) throws SQLException {
