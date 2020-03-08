@@ -1,6 +1,7 @@
 package com.napier.db;
 
 import com.napier.reports.CityReport;
+import com.napier.reports.CountryReport;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -135,7 +136,6 @@ public class DatabaseConnector implements DataLayer {
                 DESC_ORDER,limit);
     }
 
-
     private List<CityReport> createCityReport(String sql, int limit) throws SQLException {
         ResultSet resultSet = executeQuery(sql, limit);
         ArrayList<CityReport> reports = new ArrayList<>();
@@ -145,6 +145,21 @@ public class DatabaseConnector implements DataLayer {
                     resultSet.getString("Country"),
                     resultSet.getString("District"),
                     resultSet.getInt("Population")));
+        }
+        return reports;
+    }
+
+    private List<CountryReport> createCountryReport(String sql, int limit) throws SQLException {
+        ResultSet resultSet = executeQuery(sql, limit);
+        ArrayList<CountryReport> reports = new ArrayList<>();
+        while (resultSet.next()){
+            reports.add(new CountryReport(
+                    resultSet.getString("Code"),
+                    resultSet.getString("Name"),
+                    resultSet.getString("Continent"),
+                    resultSet.getString("Region"),
+                    resultSet.getInt("Population"),
+                    resultSet.getInt("Capital")));
         }
         return reports;
     }
