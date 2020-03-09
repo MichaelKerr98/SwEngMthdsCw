@@ -14,11 +14,15 @@ public class DatabaseConnector implements DataLayer {
 
     private Connection con = null;
 
-    private static String SELECT_CITY = "SELECT c.name, c.population, c.district, cn.name as country\n";
+    private static String SELECT_COUNTRY_REPORT = "SELECT cn.code, cn.name, cn.continent, cn.region, cn.population, cn.capital\n";
+    private static String FROM_COUNTRY = "FROM country cn\n";
+    public static String SELECT_COUNTRY_REPORT_FROM_COUNTRY = SELECT_COUNTRY_REPORT+FROM_COUNTRY;
+
+    private static String SELECT_CITY_REPORT = "SELECT c.name, c.population, c.district, cn.name as country\n";
     private static String FROM_CITY_C_AND_COUNTRY_CN_TABLE = "FROM city c, country cn\n";
     private static String WHERE_CN_CC_EQUALS_C_CC = "WHERE cn.code = c.countrycode\n";
-    public static String DESC_ORDER = "ORDER BY c.population DESC;\n";
-    public static String SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE = SELECT_CITY + FROM_CITY_C_AND_COUNTRY_CN_TABLE + WHERE_CN_CC_EQUALS_C_CC;
+    public static String DESC_ORDER = "ORDER BY population DESC;\n";
+    public static String SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE = SELECT_CITY_REPORT + FROM_CITY_C_AND_COUNTRY_CN_TABLE + WHERE_CN_CC_EQUALS_C_CC;
 
     /**
      * Method to connect to the MySQL Database.
@@ -136,6 +140,14 @@ public class DatabaseConnector implements DataLayer {
         return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
                 DESC_ORDER,limit);
     }
+
+    @Override
+    public List<CountryReport> getCountriesInRegionOrganizedByLargestToSmallestPopulation(String region, int limit) throws SQLException {
+        return createCountryReport(SELECT_COUNTRY_REPORT_FROM_COUNTRY+
+                "WHERE cn.region = '"+region+"'\n" +
+                DESC_ORDER,limit);
+    }
+
 
     private List<CityReport> createCityReport(String sql, int limit) throws SQLException {
         ResultSet resultSet = executeQuery(sql, limit);
