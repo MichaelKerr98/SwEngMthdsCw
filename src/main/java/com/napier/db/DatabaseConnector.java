@@ -146,7 +146,7 @@ public class DatabaseConnector implements DataLayer {
      *
      * @param region The name of the region.
      * @param limit The limit (if limit < 0, limit will be ignored.)
-     * @return Ordered List of CountryReport of a specific region.
+     * @return Ordered List of CountryReports of a specific region.
      * @throws SQLException Thrown when there is an database access error.
      */
     @Override
@@ -161,7 +161,7 @@ public class DatabaseConnector implements DataLayer {
      *
      * @param continent The name of the continent.
      * @param limit The limit (if limit < 0, limit will be ignored.)
-     * @return Ordered List of CountryReport of a specific continent.
+     * @return Ordered List of CountryReports of a specific continent.
      * @throws SQLException Thrown when there is an database access error.
      */
     @Override
@@ -171,6 +171,17 @@ public class DatabaseConnector implements DataLayer {
                 DESC_ORDER,limit);
     }
 
+    /**
+     * Method that returns a ordered List of CountryReports.
+     *
+     * @param limit The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of CountryReports.
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    @Override
+    public List<CountryReport> getCountriesInTheWorldOrganizedByLargestToSmallestPopulation(int limit) throws SQLException {
+        return createCountryReport(SELECT_COUNTRY_REPORT_FROM_COUNTRY+ DESC_ORDER,limit);
+    }
 
     private List<CityReport> createCityReport(String sql, int limit) throws SQLException {
         ResultSet resultSet = executeQuery(sql, limit);

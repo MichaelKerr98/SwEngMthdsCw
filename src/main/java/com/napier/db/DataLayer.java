@@ -89,4 +89,13 @@ public interface DataLayer {
      * @throws SQLException Thrown when there is an database access error.
      */
     List<CountryReport> getCountriesInAContinentOrganizedByLargestToSmallestPopulation(String continent, int limit) throws SQLException;
+
+    /**
+     * Method that returns a ordered List of CountryReports of the world.
+     *
+     * @param limit The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of CountryReports of the world.
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    List<CountryReport> getCountriesInTheWorldOrganizedByLargestToSmallestPopulation(int limit) throws SQLException;
 }
