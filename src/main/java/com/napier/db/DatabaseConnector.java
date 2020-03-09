@@ -20,7 +20,6 @@ public class DatabaseConnector implements DataLayer {
     public static String DESC_ORDER = "ORDER BY c.population DESC;\n";
     public static String SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE = SELECT_CITY + FROM_CITY_C_AND_COUNTRY_CN_TABLE + WHERE_CN_CC_EQUALS_C_CC;
 
-
     /**
      * Method to connect to the MySQL Database.
      */
@@ -103,6 +102,7 @@ public class DatabaseConnector implements DataLayer {
      * @return Ordered List of CityReports of a specific region.
      * @throws SQLException Thrown when there is an database access error.
      */
+    @Override
     public List<CityReport> getCitiesInARegionOrganisedByLargestToSmallestPopulation(String region, int limit) throws SQLException {
         return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
                 "AND cn.region = '"+ region+"'\n" +
@@ -117,6 +117,7 @@ public class DatabaseConnector implements DataLayer {
      * @return Ordered List of CityReports of a specific country.
      * @throws SQLException Thrown when there is an database access error.
      */
+    @Override
     public List<CityReport> getCitiesInACountryOrganisedByLargestToSmallestPopulation(String country, int limit) throws SQLException{
         return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
                 "AND cn.name = '"+country+"'\n" +
