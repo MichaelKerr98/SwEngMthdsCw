@@ -24,9 +24,6 @@ public class DatabaseConnector implements DataLayer {
     public static String DESC_ORDER = "ORDER BY population DESC;\n";
     public static String SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE = SELECT_CITY_REPORT + FROM_CITY_C_AND_COUNTRY_CN_TABLE + WHERE_CN_CC_EQUALS_C_CC;
 
-    /**
-     * Method to connect to the MySQL Database.
-     */
     @Override
     public void connect() {
         try {
@@ -54,9 +51,6 @@ public class DatabaseConnector implements DataLayer {
         }
     }
 
-    /**
-     * Method to disconnect from the MySQL Database.
-     */
     @Override
     public void disconnect() {
         if (con != null) {
@@ -68,14 +62,6 @@ public class DatabaseConnector implements DataLayer {
         }
     }
 
-    /**
-     * Method that returns a ordered List of CityReports of a specific district.
-     *
-     * @param district The name of the district.
-     * @param limit    The limit (if limit < 0, limit will be ignored.)
-     * @return Ordered List of CityReports of a specific district.
-     * @throws SQLException Thrown when there is an database access error.
-     */
     @Override
     public List<CityReport> getCitiesInADistrictOrganizedByLargestToSmallestPopulation(String district, int limit) throws SQLException {
         return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
@@ -83,14 +69,6 @@ public class DatabaseConnector implements DataLayer {
                 DESC_ORDER,limit);
     }
 
-    /**
-     * Method that returns a ordered List of CityReports of a specific continent.
-     *
-     * @param continent The name of the continent.
-     * @param limit    The limit (if limit < 0, limit will be ignored.)
-     * @return Ordered List of CityReports of a specific continent.
-     * @throws SQLException Thrown when there is an database access error.
-     */
     @Override
     public List<CityReport> getCitiesInAContinentOrganizedByLargestToSmallestPopulation(String continent, int limit) throws SQLException {
         return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
@@ -98,14 +76,6 @@ public class DatabaseConnector implements DataLayer {
                 DESC_ORDER,limit);
     }
 
-    /**
-     * Method that returns a ordered List of CityReports of a specific region.
-     *
-     * @param region The name of the region.
-     * @param limit    The limit (if limit < 0, limit will be ignored.)
-     * @return Ordered List of CityReports of a specific region.
-     * @throws SQLException Thrown when there is an database access error.
-     */
     @Override
     public List<CityReport> getCitiesInARegionOrganisedByLargestToSmallestPopulation(String region, int limit) throws SQLException {
         return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
@@ -113,14 +83,6 @@ public class DatabaseConnector implements DataLayer {
                 DESC_ORDER,limit);
     }
 
-    /**
-     * Method that returns a ordered List of CityReports of a specific country.
-     *
-     * @param country The name of the country.
-     * @param limit    The limit (if limit < 0, limit will be ignored.)
-     * @return Ordered List of CityReports of a specific country.
-     * @throws SQLException Thrown when there is an database access error.
-     */
     @Override
     public List<CityReport> getCitiesInACountryOrganisedByLargestToSmallestPopulation(String country, int limit) throws SQLException{
         return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
@@ -128,27 +90,12 @@ public class DatabaseConnector implements DataLayer {
                 DESC_ORDER, limit);
     }
 
-    /**
-     * Method that returns a ordered List of CityReports of the world.
-     *
-     * @param limit The limit (if limit < 0, limit will be ignored.)
-     * @return Ordered List of CityReports of the world.
-     * @throws SQLException Thrown when there is an database access error.
-     */
     @Override
     public List<CityReport> getCitiesInTheWorldOrganizedByLargestToSmallestPopulation(int limit) throws SQLException {
         return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
                 DESC_ORDER,limit);
     }
 
-    /**
-     * Method that returns a ordered List of CountryReports of a specific region.
-     *
-     * @param region The name of the region.
-     * @param limit The limit (if limit < 0, limit will be ignored.)
-     * @return Ordered List of CountryReports of a specific region.
-     * @throws SQLException Thrown when there is an database access error.
-     */
     @Override
     public List<CountryReport> getCountriesInARegionOrganizedByLargestToSmallestPopulation(String region, int limit) throws SQLException {
         return createCountryReport(SELECT_COUNTRY_REPORT_FROM_COUNTRY+
@@ -156,14 +103,6 @@ public class DatabaseConnector implements DataLayer {
                 DESC_ORDER,limit);
     }
 
-    /**
-     * Method that returns a ordered List of CountryReports of a specific continent.
-     *
-     * @param continent The name of the continent.
-     * @param limit The limit (if limit < 0, limit will be ignored.)
-     * @return Ordered List of CountryReports of a specific continent.
-     * @throws SQLException Thrown when there is an database access error.
-     */
     @Override
     public List<CountryReport> getCountriesInAContinentOrganizedByLargestToSmallestPopulation(String continent, int limit) throws SQLException {
         return createCountryReport(SELECT_COUNTRY_REPORT_FROM_COUNTRY+
@@ -171,13 +110,6 @@ public class DatabaseConnector implements DataLayer {
                 DESC_ORDER,limit);
     }
 
-    /**
-     * Method that returns a ordered List of CountryReports.
-     *
-     * @param limit The limit (if limit < 0, limit will be ignored.)
-     * @return Ordered List of CountryReports.
-     * @throws SQLException Thrown when there is an database access error.
-     */
     @Override
     public List<CountryReport> getCountriesInTheWorldOrganizedByLargestToSmallestPopulation(int limit) throws SQLException {
         return createCountryReport(SELECT_COUNTRY_REPORT_FROM_COUNTRY+ DESC_ORDER,limit);
