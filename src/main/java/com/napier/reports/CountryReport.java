@@ -24,6 +24,8 @@ public class CountryReport {
      * @param capital The countries capital.
      */
     public CountryReport(String countryCode, String countryName, String continent, String region, Integer population, Integer capital) {
+        if(countryCode == null || countryName == null || continent == null || region == null || population == null || capital == null)
+            throw new IllegalArgumentException("Null is not allowed!");
         this.countryCode = countryCode;
         this.countryName = countryName;
         this.continent = continent;
