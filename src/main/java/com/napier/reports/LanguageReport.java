@@ -7,8 +7,8 @@ package com.napier.reports;
 public class LanguageReport {
 
     private String language;
-    private int speakers;
-    private double percentage;
+    private Integer speakers;
+    private Double percentage;
 
     /**
      * The Constructor of the LanguageReport.
@@ -17,7 +17,9 @@ public class LanguageReport {
      * @param speakers The number of people speaking a certain language.
      * @param percentage The percentage of the world's population.
      */
-    public LanguageReport(String language, int speakers, double percentage) {
+    public LanguageReport(String language, Integer speakers, Double percentage) {
+        if(language == null || speakers == null || percentage == null)
+            throw new IllegalArgumentException("Null is not allowed!");
         this.language = language;
         this.speakers = speakers;
         this.percentage = percentage;
