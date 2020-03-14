@@ -2,6 +2,7 @@ package com.napier.db;
 
 import com.napier.reports.CityReport;
 import com.napier.reports.CountryReport;
+import com.napier.reports.PopulationReport;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -98,4 +99,34 @@ public interface DataLayer {
      * @throws SQLException Thrown when there is an database access error.
      */
     List<CountryReport> getCountriesInTheWorldOrganizedByLargestToSmallestPopulation(int limit) throws SQLException;
+
+    /**
+     * Method that returns an ordered List of PopulationReport of the continent.
+     *
+     * @param continent The name of the continent.
+     * @param limit The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of PopulationReport of a specific continent.
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    List<PopulationReport> getPopulationOfContinentInTotalInCitiesAndNotInCities(String continent, int limit) throws SQLException;
+
+    /**
+     * Method that returns an ordered List of PopulationReport of the region.
+     *
+     * @param region The name of the region.
+     * @param limit The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of PopulationReport of a specific region.
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    List<PopulationReport> getPopulationOfRegionInTotalInCitiesAndNotInCities(String region, int limit) throws SQLException;
+
+    /**
+     * Method that returns an ordered List of PopulationReport of the country.
+     *
+     * @param country The name of the country.
+     * @param limit The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of PopulationReport of a specific country.
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    List<PopulationReport> getPopulationOfCountryInTotalInCitiesAndNotInCities(String country, int limit) throws SQLException;
 }
