@@ -2,6 +2,7 @@ package com.napier.db;
 
 import com.napier.reports.CityReport;
 import com.napier.reports.CountryReport;
+import com.napier.reports.PopulationReport;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,6 +14,13 @@ import java.util.List;
 public class DatabaseConnector implements DataLayer {
 
     private Connection con = null;
+
+    private static String SELECT_POPULATION_REPORT = ", SUM(country.Population) AS Total_Population, " +
+            "SUM(city.Population) AS Population_Living_In_Cities, SUM(country.Population - city.Population) AS" +
+            " Population_Not_Living_In_Cities\n";
+    private static String FROM_COUNTRY_AND_JOIN = "FROM country\nJOIN city ON country.capital=city.id\n";
+    private static String SELECT_POPULATION_REPORT_FROM_COUNTRY_AND_JOIN = SELECT_POPULATION_REPORT + FROM_COUNTRY_AND_JOIN;
+    private static String ORDER_BY = "ORDER BY Total_Population\n";
 
     private static String SELECT_COUNTRY_REPORT = "SELECT cn.code, cn.name, cn.continent, cn.region, cn.population, cn.capital\n";
     private static String FROM_COUNTRY = "FROM country cn\n";
@@ -115,6 +123,24 @@ public class DatabaseConnector implements DataLayer {
         return createCountryReport(SELECT_COUNTRY_REPORT_FROM_COUNTRY+ DESC_ORDER,limit);
     }
 
+    @Override
+    public List<PopulationReport> getPopulationOfContinentInTotalInCitiesAndNotInCities(String continent, int limit) throws SQLException{
+        return createPopulationReport("SELECT " + continent + SELECT_POPULATION_REPORT_FROM_COUNTRY_AND_JOIN +
+                "GROUP BY '"+continent+"'\n" + ORDER_BY, limit);
+    }
+
+    @Override
+    public List<PopulationReport> getPopulationOfRegionInTotalInCitiesAndNotInCities(String region, int limit) throws SQLException {
+        return createPopulationReport("SELECT " + region + SELECT_POPULATION_REPORT_FROM_COUNTRY_AND_JOIN +
+                "GROUP BY '"+region+"'\n" + ORDER_BY, limit);
+    }
+
+    @Override
+    public List<PopulationReport> getPopulationOfCountryInTotalInCitiesAndNotInCities(String country, int limit) throws SQLException {
+        return createPopulationReport("SELECT " + country + SELECT_POPULATION_REPORT_FROM_COUNTRY_AND_JOIN +
+                "GROUP BY '"+country+"'\n" + ORDER_BY, limit);
+    }
+
     private List<CityReport> createCityReport(String sql, int limit) throws SQLException {
         ResultSet resultSet = executeQuery(sql, limit);
         ArrayList<CityReport> reports = new ArrayList<>();
@@ -139,6 +165,19 @@ public class DatabaseConnector implements DataLayer {
                     resultSet.getString("Region"),
                     resultSet.getInt("Population"),
                     resultSet.getInt("Capital")));
+        }
+        return reports;
+    }
+
+    private List<PopulationReport> createPopulationReport(String sql, int limit) throws SQLException {
+        ResultSet resultSet = executeQuery(sql, limit);
+        ArrayList<PopulationReport> reports = new ArrayList<>();
+        while (resultSet.next()){
+            reports.add(new PopulationReport(
+                    resultSet.getString("Area Scope"),
+                    resultSet.getInt("Total Population"),
+                    resultSet.getInt("Total Population In Cities"),
+                    resultSet.getInt("Total Population Not In Cities")));
         }
         return reports;
     }
