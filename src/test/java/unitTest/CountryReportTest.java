@@ -1,4 +1,4 @@
-package com.napier.reports;
+package unitTest;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

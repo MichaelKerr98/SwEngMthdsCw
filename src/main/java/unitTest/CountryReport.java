@@ -1,4 +1,4 @@
-package com.napier.reports;
+package unitTest;
 
 /**
  * The CountryReport. Contains Country-information such as

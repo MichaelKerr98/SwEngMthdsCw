@@ -1,7 +1,7 @@
 package com.napier.db;
 
-import com.napier.reports.CityReport;
-import com.napier.reports.CountryReport;
+import unitTest.CityReport;
+import unitTest.CountryReport;
 
 import java.sql.SQLException;
 import java.util.List;

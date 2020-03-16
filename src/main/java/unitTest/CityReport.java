@@ -1,4 +1,4 @@
-package com.napier.reports;
+package unitTest;
 
 /**
  * The CityReport. Contains city-information such as

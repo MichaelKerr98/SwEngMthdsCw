@@ -1,4 +1,4 @@
-package com.napier.reports;
+package unitTest;
 
 /**
  * The LanguageReport. Contains language-information
