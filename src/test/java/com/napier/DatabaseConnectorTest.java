@@ -12,7 +12,7 @@ public class DatabaseConnectorTest {
     private static DataLayer testee;
 
     @BeforeAll
-    public static void init()
+    public static void setUp()
     {
         testee = new DatabaseConnector();
         testee.connect();
@@ -20,12 +20,12 @@ public class DatabaseConnectorTest {
 
     @Test
     public void getCitiesInADistrictOrganizedByLargestToSmallestPopulation() throws SQLException {
-        assertEquals(4, testee.getCitiesInADistrictOrganizedByLargestToSmallestPopulation("DE",4).size());
+        assertEquals(4, testee.getCitiesInADistrictOrganizedByLargestToSmallestPopulation("Berlin",4).size());
     }
 
     @Test
     public void getCitiesInAContinentOrganizedByLargestToSmallestPopulation() throws SQLException {
-        assertEquals(4, testee.getCountriesInAContinentOrganizedByLargestToSmallestPopulation("Africa",4));
+        assertEquals(4, testee.getCountriesInAContinentOrganizedByLargestToSmallestPopulation("Europe",4).size());
     }
 
     /*@Test
