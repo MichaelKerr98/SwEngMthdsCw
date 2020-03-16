@@ -16,6 +16,7 @@ install:
 
 before_script:
   - mvn clean
+
 jobs:
   include:
     - stage: unit tests
@@ -30,5 +31,8 @@ jobs:
       jdk: oraclejdk11
       script: echo "Deploy"
 
-script:
-  - mvn test -Dtest=com.napier.sem.AppTest
+stages:
+  - unit tests
+  - integration tests
+  - name: deploy
+    if: branch = master
