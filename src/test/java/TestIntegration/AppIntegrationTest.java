@@ -20,13 +20,12 @@ public class AppIntegrationTest
     @BeforeAll
     static void init()
     {
-        databaseConnector = new DatabaseConnector();
-        databaseConnector.connect();
+
     }
 
     @Test
     void testGetEmployee()
     {
-        CityReport cityreport = new CityReport(name, country, district, population);
+
     }
 }

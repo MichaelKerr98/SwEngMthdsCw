@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class CountryReportTest {
+class CountryReportT {
 
     @Test
     public void countryReportTest(){
-        CountryReport testee = new CountryReport("DE", "Germany", "Europe", "Western Europe", 82_790_00, 3_068);
+        Reports.CountryReport testee = new Reports.CountryReport("DE", "Germany", "Europe", "Western Europe", 82_790_00, 3_068);
         assertEquals("DE",testee.getCountryCode());
         assertEquals("Germany",testee.getCountryName());
         assertEquals("Europe",testee.getContinent());
@@ -19,7 +19,7 @@ class CountryReportTest {
     }
 
     @Test void illegalCountryReportTest(){
-        assertThrows(IllegalArgumentException.class, () -> new CountryReport(null, "Germany", "Europe", null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> new Reports.CountryReport(null, "Germany", "Europe", null, null, null));
     }
 
 }
