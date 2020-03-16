@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LanguageReportTest {
 
-
     @Test
     public void languageReportTest(){
         LanguageReport testee = new LanguageReport("test",100_000, 15.3D);
@@ -14,7 +13,8 @@ class LanguageReportTest {
         assertEquals(15.3D, testee.getPercentage());
     }
 
+    @Test
     public void illegalLanguageReportTest(){
-        assertThrows(IllegalArgumentException.class, () -> new LanguageReport("test", null, null));
+        assertThrows(IllegalArgumentException.class, ()-> new LanguageReport(null, 100, 15));
     }
 }
