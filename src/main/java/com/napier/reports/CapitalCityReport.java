@@ -17,6 +17,7 @@ public class CapitalCityReport {
         this.name = name;
         this.country = country;
         this.population = population;
+
     }
 
     // Getters
