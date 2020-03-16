@@ -1,4 +1,4 @@
-package TestUnit;
+package Reports;
 
 /**
  * The CountryReport. Contains Country-information such as

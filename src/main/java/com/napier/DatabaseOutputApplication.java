@@ -2,7 +2,7 @@ package com.napier;
 
 import com.napier.db.DataLayer;
 import com.napier.db.DatabaseConnector;
-import TestUnit.CityReport;
+import Reports.CityReport;
 
 import java.sql.SQLException;
 import java.util.List;

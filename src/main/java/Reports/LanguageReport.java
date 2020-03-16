@@ -1,4 +1,4 @@
-package TestUnit;
+package Reports;
 
 /**
  * The LanguageReport. Contains language-information
