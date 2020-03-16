@@ -6,9 +6,9 @@ package Reports;
  */
 public class LanguageReport {
 
-    private String language;
-    private Integer speakers;
-    private Double percentage;
+    public String language;
+    public Integer speakers;
+    public Double percentage;
 
     /**
      * The Constructor of the LanguageReport.

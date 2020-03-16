@@ -6,12 +6,12 @@ package Reports;
  */
 public class CountryReport {
 
-    private final String countryCode;
-    private final String countryName;
-    private final String continent;
-    private final String region;
-    private final Integer population;
-    private final Integer capital;
+    public final String countryCode;
+    public final String countryName;
+    public final String continent;
+    public final String region;
+    public final Integer population;
+    public final Integer capital;
 
     /**
      * The Constructor of the CountryReport.

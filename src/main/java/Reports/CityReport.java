@@ -6,10 +6,10 @@ package Reports;
  */
 public class CityReport {
 
-    private final String name;
-    private final String country;
-    private final String district;
-    private final Integer population;
+    public final String name;
+    public final String country;
+    public final String district;
+    public final Integer population;
 
     /**
      * The Constructor of the CityReport.
