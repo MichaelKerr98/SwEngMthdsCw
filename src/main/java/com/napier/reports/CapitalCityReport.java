@@ -12,6 +12,8 @@ public class CapitalCityReport {
 
     // Constructor
     public CapitalCityReport(String name, String country, Integer population) {
+        if(name == null || country == null || population == null)
+            throw new IllegalArgumentException("Null not allowed.");
         this.name = name;
         this.country = country;
         this.population = population;
