@@ -9,9 +9,9 @@ public class PopulationReport {
 
     // areaScope will either be the continent, region or country
     private final String areaScope;
-    private final Integer population;
-    private final Integer populationInCities;
-    private final Integer populationNotInCities;
+    private final Long population;
+    private final Long populationInCities;
+    private final Long populationNotInCities;
 
     /**
      * The Constructor of PopulationReport.
@@ -21,7 +21,7 @@ public class PopulationReport {
      * @param populationInCities The total population of the continent/region/country living in cities
      * @param populationNotInCities The total population of the continent/region/country not living in cities
      */
-    public PopulationReport(String areaScope, Integer population, Integer populationInCities, Integer populationNotInCities) {
+    public PopulationReport(String areaScope, Long population, Long populationInCities, Long populationNotInCities) {
         this.areaScope = areaScope;
         this.population = population;
         this.populationInCities = populationInCities;
@@ -35,15 +35,15 @@ public class PopulationReport {
         return areaScope;
     }
 
-    public Integer getPopulation() {
+    public Long getPopulation() {
         return population;
     }
 
-    public Integer getPopulationInCities() {
+    public Long getPopulationInCities() {
         return populationInCities;
     }
 
-    public Integer getPopulationNotInCities() {
+    public Long getPopulationNotInCities() {
         return populationNotInCities;
     }
 
