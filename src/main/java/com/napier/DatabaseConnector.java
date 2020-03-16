@@ -34,13 +34,15 @@ public class DatabaseConnector implements DataLayer {
         }
 
         int retries = 10;
+        int timer= 1000;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
+            if (i>5)
+            {timer = 30000;}
             try {
-                Thread.sleep(30_000);
+                Thread.sleep(timer);
                 con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=false", "root", "supersecurepw");
                 System.out.println("Successfully connected..");
-                Thread.sleep(5_000);
                 break;
             } catch (SQLException sqle) {
                 System.out.println("Failed to connect to database attempt " + i);
