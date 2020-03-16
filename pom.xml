@@ -8,6 +8,7 @@
     <artifactId>SwEngMthdsCw</artifactId>
     <version>0.1.0.2</version>
 
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -94,6 +95,7 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
+                    <finalName>SwEngMthdsCw-0.1.0.2-jar-with-dependencies</finalName>
                     <archive>
                         <manifest>
                             <mainClass>com.napier.DatabaseOutputApplication</mainClass>
@@ -102,6 +104,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
                 <executions>
                     <execution>

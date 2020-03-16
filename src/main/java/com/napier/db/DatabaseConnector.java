@@ -6,7 +6,10 @@ import Reports.CountryReport;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.*;
+import com.mysql.jdbc.Driver;
 /**
  * Initializes the connection and disconnection from the application and database.
  */
