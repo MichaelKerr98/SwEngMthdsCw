@@ -1,6 +1,5 @@
-package TestUnit;
+package com.napier.reports;
 
-import Reports.CountryReport;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,7 +8,7 @@ class CountryReportT {
 
     @Test
     public void countryReportTest(){
-        Reports.CountryReport testee = new Reports.CountryReport("DE", "Germany", "Europe", "Western Europe", 82_790_00, 3_068);
+        com.napier.reports.CountryReport testee = new com.napier.reports.CountryReport("DE", "Germany", "Europe", "Western Europe", 82_790_00, 3_068);
         assertEquals("DE",testee.getCountryCode());
         assertEquals("Germany",testee.getCountryName());
         assertEquals("Europe",testee.getContinent());
@@ -19,7 +18,7 @@ class CountryReportT {
     }
 
     @Test void illegalCountryReportTest(){
-        assertThrows(IllegalArgumentException.class, () -> new Reports.CountryReport(null, "Germany", "Europe", null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> new com.napier.reports.CountryReport(null, "Germany", "Europe", null, null, null));
     }
 
 }

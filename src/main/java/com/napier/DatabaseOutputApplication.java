@@ -1,8 +1,6 @@
 package com.napier;
 
-import com.napier.db.DataLayer;
-import com.napier.db.DatabaseConnector;
-import Reports.CityReport;
+import com.napier.reports.CityReport;
 
 import java.sql.SQLException;
 import java.util.List;

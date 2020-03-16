@@ -1,4 +1,4 @@
-package Reports;
+package com.napier.reports;
 
 /**
  * The LanguageReport. Contains language-information

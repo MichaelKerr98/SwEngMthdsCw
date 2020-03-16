@@ -1,4 +1,4 @@
-package Reports;
+package com.napier.reports;
 
 /**
  * The CountryReport. Contains Country-information such as
@@ -25,7 +25,7 @@ public class CountryReport {
      */
     public CountryReport(String countryCode, String countryName, String continent, String region, Integer population, Integer capital) {
         if(countryCode == null || countryName == null || continent == null || region == null || population == null || capital == null)
-            throw new IllegalArgumentException("Null is not allowed!");
+            throw new IllegalArgumentException("Null not allowed.");
         this.countryCode = countryCode;
         this.countryName = countryName;
         this.continent = continent;

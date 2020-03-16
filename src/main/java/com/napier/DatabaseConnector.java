@@ -1,21 +1,24 @@
-package com.napier.db;
+package com.napier;
 
-import Reports.CityReport;
-import Reports.CountryReport;
+import com.napier.reports.CapitalCityReport;
+import com.napier.reports.CityReport;
+import com.napier.reports.CountryReport;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.*;
-import com.mysql.jdbc.Driver;
+
 /**
  * Initializes the connection and disconnection from the application and database.
  */
 public class DatabaseConnector implements DataLayer {
 
     private Connection con = null;
+
+    private static String SELECT_CAPITAL_CITY_REPORT = "SELECT city.name AS Capital, country.name AS Country, city.population\n";
+    private static String FROM_CITY = "FROM city\n";
+    private static String JOIN_COUNTRY = "JOIN country ON city.id=country.capital";
+    private static String SELECT_CAPITAL_CITY_REPORT_FROM_CITY = SELECT_CAPITAL_CITY_REPORT + FROM_CITY + JOIN_COUNTRY;
 
     private static String SELECT_COUNTRY_REPORT = "SELECT cn.code, cn.name, cn.continent, cn.region, cn.population, cn.capital\n";
     private static String FROM_COUNTRY = "FROM country cn\n";
@@ -40,10 +43,9 @@ public class DatabaseConnector implements DataLayer {
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
             try {
-                Thread.sleep(30_000);
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "supersecurepw");
+                Thread.sleep(10_000);
+                con = DriverManager.getConnection("jdbc:mysql://localhost:33080/world?useSSL=false", "root", "supersecurepw");
                 System.out.println("Successfully connected..");
-                Thread.sleep(5_000);
                 break;
             } catch (SQLException sqle) {
                 System.out.println("Failed to connect to database attempt " + i);
@@ -118,6 +120,23 @@ public class DatabaseConnector implements DataLayer {
         return createCountryReport(SELECT_COUNTRY_REPORT_FROM_COUNTRY+ DESC_ORDER,limit);
     }
 
+    @Override
+    public List<CapitalCityReport> getCapitalCitiesInAContinentOrganizedByLargestToSmallestPopulation(String region, int limit) throws SQLException {
+        return createCapitalCityReport(SELECT_CAPITAL_CITY_REPORT_FROM_CITY +
+                "WHERE country.region = '"+region+"'\n" + DESC_ORDER, limit);
+    }
+
+    @Override
+    public List<CapitalCityReport> getCapitalCitiesInARegionOrganizedByLargestToSmallestPopulation(String continent, int limit) throws SQLException {
+        return createCapitalCityReport(SELECT_CAPITAL_CITY_REPORT_FROM_CITY +
+                "WHERE country.continent = '"+continent+"'\n" + DESC_ORDER, limit);
+    }
+
+    @Override
+    public List<CapitalCityReport> getCapitalCitiesInTheWorldOrganizedByLargestToSmallestPopulation(int limit) throws SQLException {
+        return createCapitalCityReport(SELECT_CAPITAL_CITY_REPORT_FROM_CITY + DESC_ORDER, limit);
+    }
+
     private List<CityReport> createCityReport(String sql, int limit) throws SQLException {
         ResultSet resultSet = executeQuery(sql, limit);
         ArrayList<CityReport> reports = new ArrayList<>();
@@ -142,6 +161,18 @@ public class DatabaseConnector implements DataLayer {
                     resultSet.getString("Region"),
                     resultSet.getInt("Population"),
                     resultSet.getInt("Capital")));
+        }
+        return reports;
+    }
+
+    private List<CapitalCityReport> createCapitalCityReport(String sql, int limit) throws SQLException {
+        ResultSet resultSet = executeQuery(sql, limit);
+        ArrayList<CapitalCityReport> reports = new ArrayList<>();
+        while (resultSet.next()){
+            reports.add(new CapitalCityReport(
+                    resultSet.getString("Name"),
+                    resultSet.getString("Country"),
+                    resultSet.getInt("Population")));
         }
         return reports;
     }
