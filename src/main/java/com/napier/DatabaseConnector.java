@@ -48,7 +48,7 @@ public class DatabaseConnector implements DataLayer {
             }
             try {
                 Thread.sleep(timer);
-                con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=false", "root", "supersecurepw");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:33070/world?useSSL=false", "root", "supersecurepw");
                 System.out.println("Successfully connected..");
                 break;
             } catch (SQLException sqle) {
