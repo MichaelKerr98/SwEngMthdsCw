@@ -20,7 +20,7 @@ public class DatabaseOutputApplication {
         DataLayer connector = new DatabaseConnector();
         connector.connect();
 
-        List<CityReport> cityReports = connector.getCitiesInADistrictOrganizedByLargestToSmallestPopulation("Gelderland",5);
+        List<CityReport> cityReports = connector.getCitiesInADistrictOrganizedByLargestToSmallestPopulation("Yeeet",5);
         for(CityReport cityReport : cityReports)
             System.out.println(cityReport);
         connector.disconnect();
