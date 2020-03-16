@@ -9,10 +9,10 @@ import static org.junit.Assert.assertEquals;
 
 public class DatabaseConnectorTest {
 
-    private DataLayer testee;
+    private static DataLayer testee;
 
     @BeforeAll
-    public void init()
+    public static void init()
     {
         testee = new DatabaseConnector();
         testee.connect();
