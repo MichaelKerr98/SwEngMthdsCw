@@ -25,7 +25,7 @@ jobs:
       script: mvn test -Dtest=com.napier.reports.*
     - stage: integration tests
       jdk: oraclejdk11
-      script: mvn test -Dtest=com.napier.integrationtest.DatabaseIntegrationTest
+      script: mvn test -Dtest=com.napier.DatabaseConnectorTest
 
 stages:
   - unit tests
