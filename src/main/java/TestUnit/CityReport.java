@@ -1,4 +1,4 @@
-package unitTest;
+package TestUnit;
 
 /**
  * The CityReport. Contains city-information such as
