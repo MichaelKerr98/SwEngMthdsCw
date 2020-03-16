@@ -15,6 +15,6 @@ public class CapitalCityReportTest {
 
     @Test
     public void illegalCapitalCityReportTest() {
-        assertThrows(IllegalArgumentException.class,() -> new CapitalCityReport("Canberra", null, null));
+        assertThrows(IllegalArgumentException.class,() -> new CapitalCityReport(null, null, null));
     }
 }
