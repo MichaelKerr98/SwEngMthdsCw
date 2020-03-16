@@ -1,8 +1,7 @@
 package com.napier;
 
-import com.napier.db.DataLayer;
-import com.napier.db.DatabaseConnector;
 import com.napier.reports.CityReport;
+import com.napier.reports.CountryReport;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -23,6 +22,16 @@ public class DatabaseOutputApplication {
         List<CityReport> cityReports = connector.getCitiesInADistrictOrganizedByLargestToSmallestPopulation("Gelderland",5);
         for(CityReport cityReport : cityReports)
             System.out.println(cityReport);
+
+        System.out.println("Continent");
+        List<CountryReport> countryReports = connector.getCountriesInAContinentOrganizedByLargestToSmallestPopulation("South America", 4);
+        for(CountryReport countryReport : countryReports)
+            System.out.println(countryReport);
+
+        System.out.println("World");
+        List<CountryReport> countryReportsIntWorld = connector.getCountriesInTheWorldOrganizedByLargestToSmallestPopulation( 4);
+        for(CountryReport countryReport : countryReportsIntWorld)
+            System.out.println(countryReport);
         connector.disconnect();
     }
 }

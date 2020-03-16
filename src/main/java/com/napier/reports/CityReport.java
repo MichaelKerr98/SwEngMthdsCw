@@ -20,8 +20,8 @@ public class CityReport {
      * @param population The population of the city.
      */
     public CityReport(String name, String country, String district, Integer population) {
-        if(name == null || district == null || population == null || country == null)
-            throw new IllegalArgumentException("Null is not allowed!");
+        if(name == null || country == null || district == null || population == null)
+            throw new IllegalArgumentException("Null not allowed.");
         this.name = name;
         this.country = country;
         this.district = district;

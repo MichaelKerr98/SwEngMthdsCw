@@ -1,4 +1,4 @@
-package com.napier.db;
+package com.napier;
 
 import com.napier.reports.CapitalCityReport;
 import com.napier.reports.CityReport;
