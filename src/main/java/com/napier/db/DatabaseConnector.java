@@ -1,6 +1,11 @@
 package com.napier.db;
 
+import com.napier.reports.CityReport;
+import com.napier.reports.CountryReport;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Initializes the connection and disconnection from the application and database.
@@ -9,9 +14,16 @@ public class DatabaseConnector implements DataLayer {
 
     private Connection con = null;
 
-    /**
-     * Method to connect to the MySQL Database.
-     */
+    private static String SELECT_COUNTRY_REPORT = "SELECT cn.code, cn.name, cn.continent, cn.region, cn.population, cn.capital\n";
+    private static String FROM_COUNTRY = "FROM country cn\n";
+    public static String SELECT_COUNTRY_REPORT_FROM_COUNTRY = SELECT_COUNTRY_REPORT+FROM_COUNTRY;
+
+    private static String SELECT_CITY_REPORT = "SELECT c.name, c.population, c.district, cn.name as country\n";
+    private static String FROM_CITY_C_AND_COUNTRY_CN_TABLE = "FROM city c, country cn\n";
+    private static String WHERE_CN_CC_EQUALS_C_CC = "WHERE cn.code = c.countrycode\n";
+    public static String DESC_ORDER = "ORDER BY population DESC;\n";
+    public static String SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE = SELECT_CITY_REPORT + FROM_CITY_C_AND_COUNTRY_CN_TABLE + WHERE_CN_CC_EQUALS_C_CC;
+
     @Override
     public void connect() {
         try {
@@ -39,9 +51,6 @@ public class DatabaseConnector implements DataLayer {
         }
     }
 
-    /**
-     * Method to disconnect from the MySQL Database.
-     */
     @Override
     public void disconnect() {
         if (con != null) {
@@ -53,28 +62,88 @@ public class DatabaseConnector implements DataLayer {
         }
     }
 
-    /**
-     * Method which gets a SQL-Statement as a parameter and returns a Set of Results of that statement.
-     *
-     * @param sql The SQL Statement.
-     * @return The Set of Results.
-     * @throws SQLException Thrown when the SQL Statements is invalid.
-     */
     @Override
-    public ResultSet executeQuery(String sql) throws SQLException {
-        return executeQuery(sql, -1);
+    public List<CityReport> getCitiesInADistrictOrganizedByLargestToSmallestPopulation(String district, int limit) throws SQLException {
+        return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
+                "AND c.district = '"+ district+"'\n" +
+                DESC_ORDER,limit);
     }
 
-    /**
-     * Method which gets a SQL-Statement as a parameter and returns a Set of [N] Results of that statement.
-     *
-     * @param sql The SQL Statement.
-     * @param maxRows The limit for the maximum number of Results.
-     * @return The Set of Results.
-     * @throws SQLException Thrown when the SQL Statements is invalid.
-     */
     @Override
-    public ResultSet executeQuery(String sql, int maxRows) throws SQLException {
+    public List<CityReport> getCitiesInAContinentOrganizedByLargestToSmallestPopulation(String continent, int limit) throws SQLException {
+        return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
+                "AND cn.continent = '"+ continent+"'\n" +
+                DESC_ORDER,limit);
+    }
+
+    @Override
+    public List<CityReport> getCitiesInARegionOrganisedByLargestToSmallestPopulation(String region, int limit) throws SQLException {
+        return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
+                "AND cn.region = '"+ region+"'\n" +
+                DESC_ORDER,limit);
+    }
+
+    @Override
+    public List<CityReport> getCitiesInACountryOrganisedByLargestToSmallestPopulation(String country, int limit) throws SQLException{
+        return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
+                "AND cn.name = '"+country+"'\n" +
+                DESC_ORDER, limit);
+    }
+
+    @Override
+    public List<CityReport> getCitiesInTheWorldOrganizedByLargestToSmallestPopulation(int limit) throws SQLException {
+        return createCityReport(SELECT_CITY_FROM_CITY_COUNTRY_WHERE_COUNTRYCODE +
+                DESC_ORDER,limit);
+    }
+
+    @Override
+    public List<CountryReport> getCountriesInARegionOrganizedByLargestToSmallestPopulation(String region, int limit) throws SQLException {
+        return createCountryReport(SELECT_COUNTRY_REPORT_FROM_COUNTRY+
+                "WHERE cn.region = '"+region+"'\n" +
+                DESC_ORDER,limit);
+    }
+
+    @Override
+    public List<CountryReport> getCountriesInAContinentOrganizedByLargestToSmallestPopulation(String continent, int limit) throws SQLException {
+        return createCountryReport(SELECT_COUNTRY_REPORT_FROM_COUNTRY+
+                "WHERE cn.continent = '"+continent+"'\n" +
+                DESC_ORDER,limit);
+    }
+
+    @Override
+    public List<CountryReport> getCountriesInTheWorldOrganizedByLargestToSmallestPopulation(int limit) throws SQLException {
+        return createCountryReport(SELECT_COUNTRY_REPORT_FROM_COUNTRY+ DESC_ORDER,limit);
+    }
+
+    private List<CityReport> createCityReport(String sql, int limit) throws SQLException {
+        ResultSet resultSet = executeQuery(sql, limit);
+        ArrayList<CityReport> reports = new ArrayList<>();
+        while (resultSet.next()){
+            reports.add(new CityReport(
+                    resultSet.getString("Name"),
+                    resultSet.getString("Country"),
+                    resultSet.getString("District"),
+                    resultSet.getInt("Population")));
+        }
+        return reports;
+    }
+
+    private List<CountryReport> createCountryReport(String sql, int limit) throws SQLException {
+        ResultSet resultSet = executeQuery(sql, limit);
+        ArrayList<CountryReport> reports = new ArrayList<>();
+        while (resultSet.next()){
+            reports.add(new CountryReport(
+                    resultSet.getString("Code"),
+                    resultSet.getString("Name"),
+                    resultSet.getString("Continent"),
+                    resultSet.getString("Region"),
+                    resultSet.getInt("Population"),
+                    resultSet.getInt("Capital")));
+        }
+        return reports;
+    }
+
+    private ResultSet executeQuery(String sql, int maxRows) throws SQLException {
         Statement statement = buildStatement(maxRows);
         return statement.executeQuery(sql);
     }

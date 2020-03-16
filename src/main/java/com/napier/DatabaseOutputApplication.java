@@ -2,9 +2,10 @@ package com.napier;
 
 import com.napier.db.DataLayer;
 import com.napier.db.DatabaseConnector;
+import com.napier.reports.CityReport;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * The MainApplication.
@@ -19,15 +20,9 @@ public class DatabaseOutputApplication {
         DataLayer connector = new DatabaseConnector();
         connector.connect();
 
-        ResultSet resultSet = connector.executeQuery(
-                "SELECT country.name, country.population "
-                        + "FROM country "
-                        + "ORDER BY country.population DESC",
-                5);
-        while (resultSet.next()){
-            System.out.println(resultSet.getString("country.name")+ " "
-                    + resultSet.getString("country.population"));
-        }
+        List<CityReport> cityReports = connector.getCitiesInADistrictOrganizedByLargestToSmallestPopulation("Gelderland",5);
+        for(CityReport cityReport : cityReports)
+            System.out.println(cityReport);
         connector.disconnect();
     }
 }
