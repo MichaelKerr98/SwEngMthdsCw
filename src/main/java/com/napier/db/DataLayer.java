@@ -1,5 +1,6 @@
 package com.napier.db;
 
+import com.napier.reports.CapitalCityReport;
 import com.napier.reports.CityReport;
 import com.napier.reports.CountryReport;
 
@@ -98,4 +99,33 @@ public interface DataLayer {
      * @throws SQLException Thrown when there is an database access error.
      */
     List<CountryReport> getCountriesInTheWorldOrganizedByLargestToSmallestPopulation(int limit) throws SQLException;
+
+    /**
+     * Method that returns an ordered List of CapitalCityReports of a region.
+     *
+     * @param region The name of the region.
+     * @param limit The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered List of CapitalCityReports of a specific region
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    List<CapitalCityReport> getCapitalCitiesInARegionOrganizedByLargestToSmallestPopulation(String region, int limit) throws SQLException;
+
+    /**
+     * Method that returns an ordered list of CapitalCityReports of a specific continent.
+     *
+     * @param continent The name of the continent.
+     * @param limit The limit (if limit < 0, limit will be ignored.)
+     * @return Ordered list of CapitalCityReport of a specific continent.
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    List<CapitalCityReport> getCapitalCitiesInAContinentOrganizedByLargestToSmallestPopulation(String continent, int limit) throws SQLException;
+
+    /**
+     * Method that returns an ordered List of CapitalCityReports of the world
+     *
+     * @param limit The limit (if limit < 0, limit will be ignored.
+     * @return Ordered list of CapitalCityReports of the world.
+     * @throws SQLException Thrown when there is an database access error.
+     */
+    List<CapitalCityReport> getCapitalCitiesInTheWorldOrganizedByLargestToSmallestPopulation(int limit) throws SQLException;
 }
