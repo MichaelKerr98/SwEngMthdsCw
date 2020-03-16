@@ -28,27 +28,50 @@ public class DatabaseConnectorTest {
         assertEquals(4, testee.getCountriesInAContinentOrganizedByLargestToSmallestPopulation("Europe",4).size());
     }
 
-    /*@Test
-    public void getCitiesInARegionOrganisedByLargestToSmallestPopulation() {
+    @Test
+    public void getCitiesInARegionOrganisedByLargestToSmallestPopulation() throws SQLException {
+        assertEquals(10, testee.getCitiesInARegionOrganisedByLargestToSmallestPopulation("Polynesia", -1).size());
     }
 
     @Test
-    public void getCitiesInACountryOrganisedByLargestToSmallestPopulation() {
+    public void getCitiesInACountryOrganisedByLargestToSmallestPopulation() throws SQLException {
+        assertEquals(3 , testee.getCitiesInACountryOrganisedByLargestToSmallestPopulation("Switzerland",3).size());
+        assertEquals("Berlin", testee.getCitiesInACountryOrganisedByLargestToSmallestPopulation("Germany", 3).get(0).getName());
     }
 
     @Test
-    public void getCitiesInTheWorldOrganizedByLargestToSmallestPopulation() {
+    public void getCitiesInTheWorldOrganizedByLargestToSmallestPopulation() throws SQLException {
+        assertEquals("Tokyo", testee.getCitiesInTheWorldOrganizedByLargestToSmallestPopulation(1).get(0));
     }
 
     @Test
-    public void getCountriesInARegionOrganizedByLargestToSmallestPopulation() {
+    public void getCountriesInARegionOrganizedByLargestToSmallestPopulation() throws SQLException {
+        assertEquals(2, testee.getCountriesInARegionOrganizedByLargestToSmallestPopulation("Southern Europe", 2).size());
     }
 
     @Test
-    public void getCountriesInAContinentOrganizedByLargestToSmallestPopulation() {
+    public void getCountriesInAContinentOrganizedByLargestToSmallestPopulation() throws SQLException {
+        assertEquals("China", testee.getCountriesInAContinentOrganizedByLargestToSmallestPopulation("Asia", 1).get(0));
     }
 
     @Test
-    public void getCountriesInTheWorldOrganizedByLargestToSmallestPopulation() {
-    }*/
+    public void getCountriesInTheWorldOrganizedByLargestToSmallestPopulation() throws SQLException {
+        assertEquals("China", testee.getCountriesInTheWorldOrganizedByLargestToSmallestPopulation(1).get(0));
+    }
+
+    @Test
+    public void getCapitalCitiesInAContinentOrganizedByLargestToSmallestPopulation() throws SQLException {
+        assertEquals("Tokyo", testee.getCapitalCitiesInAContinentOrganizedByLargestToSmallestPopulation("Asia", 1).get(0).getName());
+    }
+
+    @Test
+    public void getCapitalCitiesInARegionOrganizedByLargestToSmallestPopulation() throws SQLException {
+        assertEquals(2, testee.getCapitalCitiesInARegionOrganizedByLargestToSmallestPopulation("Caribbean", 2).size());
+
+    }
+
+    @Test
+    public void getCapitalCitiesInTheWorldOrganizedByLargestToSmallestPopulation() throws SQLException {
+        assertEquals("Tokyo", testee.getCapitalCitiesInTheWorldOrganizedByLargestToSmallestPopulation(1).get(0).getName());
+    }
 }
