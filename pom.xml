@@ -13,7 +13,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <log4j.version>1.2.17</log4j.version>
         <org.assertj.version>3.15.0</org.assertj.version>
-        <mysql.version>5.1.44</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <org.mockito.version>1.9.5</org.mockito.version>
         <junit.version>4.12</junit.version>
     </properties>
