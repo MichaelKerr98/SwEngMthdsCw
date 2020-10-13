@@ -15,7 +15,7 @@
         <org.assertj.version>3.15.0</org.assertj.version>
         <mysql.version>5.1.44</mysql.version>
         <org.mockito.version>1.9.5</org.mockito.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
 
     <dependencies>
